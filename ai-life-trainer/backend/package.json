@@ -1,0 +1,29 @@
+{
+  "name": "ai-life-trainer-backend",
+  "version": "1.0.0",
+  "description": "Backend for AI Life Trainer application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "keywords": [
+    "ai",
+    "fitness",
+    "trainer",
+    "express",
+    "postgresql"
+  ],
+  "author": "",
+  "license": "ISC"
+}

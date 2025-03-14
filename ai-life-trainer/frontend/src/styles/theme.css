@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6;
+  }
+
+  .input {
+    @apply w-full p-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-pink-600 text-white hover:bg-pink-700 active:bg-pink-800 disabled:bg-pink-400;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+  }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Range input styling */
+input[type="range"] {
+  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply w-4 h-4 bg-pink-600 rounded-full appearance-none cursor-pointer hover:bg-pink-700;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-4 h-4 bg-pink-600 rounded-full appearance-none cursor-pointer hover:bg-pink-700;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-pink-400 rounded-full hover:bg-pink-500;
+}
+
+/* Dark mode transitions */
+.dark {
+  @apply transition-colors duration-200;
+}
+
+/* Form elements */
+select,
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"] {
+  @apply input;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin rounded-full border-4 border-gray-200 border-t-pink-600 h-10 w-10;
+}
+
+/* Message styles */
+.message {
+  @apply p-4 rounded-lg mb-4;
+}
+
+.message-success {
+  @apply bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-100;
+}
+
+.message-error {
+  @apply bg-red-100 text-red-700 dark:bg-red-800 dark:text-red-100;
+}
+
+/* Chart container */
+.chart-container {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mb-6;
+}
+
+/* Activity log cards */
+.activity-log {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow p-4 mb-4 transition-all hover:shadow-lg;
+}
+
+/* Sidebar navigation */
+.sidebar-nav {
+  @apply space-y-2;
+}
+
+.sidebar-link {
+  @apply block px-4 py-2 rounded-lg transition-colors;
+}
+
+.sidebar-link-active {
+  @apply bg-pink-600 text-white;
+}
+
+.sidebar-link-inactive {
+  @apply hover:bg-pink-100 dark:hover:bg-pink-900;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  @apply sm:hidden;
+}
+
+.mobile-menu-button {
+  @apply inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-500;
+}
+
+/* Responsive container */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
