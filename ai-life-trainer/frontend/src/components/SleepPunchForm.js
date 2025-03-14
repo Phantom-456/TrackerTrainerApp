@@ -58,13 +58,13 @@ const SleepPunchForm = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Log Sleep</h2>
+    <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Log Sleep</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Date & Time */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Date & Time
           </label>
           <input
@@ -72,21 +72,21 @@ const SleepPunchForm = () => {
             name="timestamp"
             value={formData.timestamp}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           />
         </div>
 
         {/* Sleep Quality */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Sleep Quality
           </label>
           <select
             name="quality"
             value={formData.quality}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           >
             {qualityOptions.map(option => (
@@ -95,7 +95,7 @@ const SleepPunchForm = () => {
               </option>
             ))}
           </select>
-          <div className="mt-2 flex justify-between text-xs text-gray-500">
+          <div className="mt-2 flex justify-between text-xs text-gray-500 dark:text-gray-400">
             <span>1 (Very Poor)</span>
             <span>5 (Very Good)</span>
           </div>
@@ -103,7 +103,7 @@ const SleepPunchForm = () => {
 
         {/* Notes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Notes
           </label>
           <textarea
@@ -111,7 +111,7 @@ const SleepPunchForm = () => {
             value={formData.notes}
             onChange={handleChange}
             rows="3"
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             placeholder="Add any notes about your sleep..."
           />
         </div>

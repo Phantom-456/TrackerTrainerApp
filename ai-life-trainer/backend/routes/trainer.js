@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { generateResponse, getChatHistory } = require('../controllers/trainerController');
+const { generateResponse, getChatHistory, RateLimitError, OpenAIError, DatabaseError } = require('../controllers/trainerController');
 
 // Get chat history
 router.get('/chat', async (req, res, next) => {
@@ -8,7 +8,12 @@ router.get('/chat', async (req, res, next) => {
     const history = await getChatHistory();
     res.json(history);
   } catch (error) {
-    next(error);
+    console.error('Error in GET /chat:', error);
+    if (error instanceof DatabaseError) {
+      res.status(500).json({ error: 'Failed to fetch chat history. Please try again later.' });
+    } else {
+      res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
+    }
   }
 });
 
@@ -23,7 +28,16 @@ router.post('/chat', async (req, res, next) => {
     const response = await generateResponse(message);
     res.json(response);
   } catch (error) {
-    next(error);
+    console.error('Error in POST /chat:', error);
+    if (error instanceof RateLimitError) {
+      res.status(429).json({ error: error.message });
+    } else if (error instanceof OpenAIError) {
+      res.status(503).json({ error: error.message });
+    } else if (error instanceof DatabaseError) {
+      res.status(500).json({ error: 'Failed to save chat message. Please try again later.' });
+    } else {
+      res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
+    }
   }
 });
 

@@ -39,10 +39,12 @@ app.get('/', (req, res) => {
 // Import routes
 const punchRoutes = require('./routes/punch');
 const trainerRoutes = require('./routes/trainer');
+const activityRoutes = require('./routes/activity');
 
 // Use routes
 app.use('/api/punch', punchRoutes);
 app.use('/api/trainer', trainerRoutes);
+app.use('/api/activity', activityRoutes);
 
 // Error handling middleware
 const errorHandler = require('./middleware/errorHandler');

@@ -61,13 +61,13 @@ const NutritionPunchForm = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Log Nutrition</h2>
+    <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Log Nutrition</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Date & Time */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Date & Time
           </label>
           <input
@@ -75,21 +75,21 @@ const NutritionPunchForm = () => {
             name="timestamp"
             value={formData.timestamp}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           />
         </div>
 
         {/* Meal Type */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Meal Type
           </label>
           <select
             name="meal_type"
             value={formData.meal_type}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           >
             {mealTypes.map(type => (
@@ -102,7 +102,7 @@ const NutritionPunchForm = () => {
 
         {/* Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             What did you eat?
           </label>
           <textarea
@@ -110,7 +110,7 @@ const NutritionPunchForm = () => {
             value={formData.description}
             onChange={handleChange}
             rows="4"
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             placeholder="Describe your meal in detail..."
             required
           />
@@ -118,7 +118,7 @@ const NutritionPunchForm = () => {
 
         {/* Calories */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Calories (optional)
           </label>
           <input
@@ -127,7 +127,7 @@ const NutritionPunchForm = () => {
             value={formData.calories}
             onChange={handleChange}
             min="0"
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             placeholder="Enter calories..."
           />
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PunchFlow from './components/PunchFlow';
-import Charts from './components/Charts';
+import ActivityCharts from './components/Charts';
 import AITrainer from './components/AITrainer';
 import ThemeToggle from './components/ThemeToggle';
 import './styles/theme.css';
@@ -34,7 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/punch" replace />} />
             <Route path="/punch/*" element={<PunchFlow />} />
-            <Route path="/charts" element={<Charts />} />
+            <Route path="/charts" element={<ActivityCharts />} />
             <Route path="/trainer" element={<AITrainer />} />
           </Routes>
         </main>

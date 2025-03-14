@@ -64,13 +64,13 @@ const ExercisePunchForm = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Log Exercise</h2>
+    <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Log Exercise</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Date & Time */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Date & Time
           </label>
           <input
@@ -78,14 +78,14 @@ const ExercisePunchForm = () => {
             name="timestamp"
             value={formData.timestamp}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           />
         </div>
 
         {/* Duration */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Duration (minutes)
           </label>
           <input
@@ -94,14 +94,14 @@ const ExercisePunchForm = () => {
             value={formData.duration_minutes}
             onChange={handleChange}
             min="1"
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           />
         </div>
 
         {/* Intensity Slider */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Intensity: {formData.intensity}
           </label>
           <input
@@ -111,9 +111,9 @@ const ExercisePunchForm = () => {
             max="10"
             value={formData.intensity}
             onChange={handleChange}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
           />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
             <span>1 (Light)</span>
             <span>10 (Intense)</span>
           </div>
@@ -121,7 +121,7 @@ const ExercisePunchForm = () => {
 
         {/* Tiredness Slider */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Tiredness: {formData.tiredness}
           </label>
           <input
@@ -131,9 +131,9 @@ const ExercisePunchForm = () => {
             max="10"
             value={formData.tiredness}
             onChange={handleChange}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
           />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
             <span>-10 (Exhausted)</span>
             <span>10 (Energized)</span>
           </div>
@@ -141,14 +141,14 @@ const ExercisePunchForm = () => {
 
         {/* Goal Met */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Goal Met
           </label>
           <select
             name="goal_met"
             value={formData.goal_met.toString()}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             required
           >
             <option value="true">Yes</option>
@@ -158,7 +158,7 @@ const ExercisePunchForm = () => {
 
         {/* Notes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Notes
           </label>
           <textarea
@@ -166,14 +166,14 @@ const ExercisePunchForm = () => {
             value={formData.notes}
             onChange={handleChange}
             rows="3"
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             placeholder="Add any notes about your exercise session..."
           />
         </div>
 
         {/* Calories */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Calories Burned (optional)
           </label>
           <input
@@ -182,7 +182,7 @@ const ExercisePunchForm = () => {
             value={formData.calories_burned}
             onChange={handleChange}
             min="0"
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             placeholder="Enter calories burned..."
           />
         </div>

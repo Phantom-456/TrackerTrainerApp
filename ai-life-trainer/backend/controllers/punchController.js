@@ -119,34 +119,60 @@ const createNutritionPunch = async (req, res) => {
 // Get punch history (combined from all tables)
 const getPunchHistory = async (req, res) => {
   try {
+    const { startDate, endDate, limit = 50, offset = 0 } = req.query;
+
+    let dateFilter = '';
+    const values = [limit, offset];
+    let paramIndex = 3;
+
+    if (startDate && endDate) {
+      dateFilter = `WHERE timestamp BETWEEN $${paramIndex} AND $${paramIndex + 1}`;
+      values.push(startDate, endDate);
+      paramIndex += 2;
+    } else if (startDate) {
+      dateFilter = `WHERE timestamp >= $${paramIndex}`;
+      values.push(startDate);
+      paramIndex += 1;
+    } else if (endDate) {
+      dateFilter = `WHERE timestamp <= $${paramIndex}`;
+      values.push(endDate);
+      paramIndex += 1;
+    }
+
     const query = `
-      SELECT 
+      (SELECT 
         'exercise' as type,
         id,
         timestamp,
-        duration_minutes,
-        intensity,
-        tiredness,
-        goal_met,
+        duration_minutes::text as duration_minutes,
+        intensity::text as intensity,
+        tiredness::text as tiredness,
+        goal_met::text as goal_met,
         notes,
-        calories_burned,
-        created_at
-      FROM exercise_logs
+        calories_burned::text as calories_burned,
+        NULL as quality,
+        NULL as meal_type,
+        NULL as calories,
+        NULL as description
+      FROM exercise_logs)
       UNION ALL
-      SELECT 
+      (SELECT 
         'sleep' as type,
         id,
         timestamp,
         NULL as duration_minutes,
-        quality as intensity,
+        NULL as intensity,
         NULL as tiredness,
         NULL as goal_met,
         notes,
         NULL as calories_burned,
-        created_at
-      FROM sleep_logs
+        quality::text as quality,
+        NULL as meal_type,
+        NULL as calories,
+        NULL as description
+      FROM sleep_logs)
       UNION ALL
-      SELECT 
+      (SELECT 
         'nutrition' as type,
         id,
         timestamp,
@@ -154,18 +180,25 @@ const getPunchHistory = async (req, res) => {
         NULL as intensity,
         NULL as tiredness,
         NULL as goal_met,
-        description as notes,
-        calories as calories_burned,
-        created_at
-      FROM nutrition_logs
+        NULL as notes,
+        NULL as calories_burned,
+        NULL as quality,
+        meal_type,
+        calories::text as calories,
+        description
+      FROM nutrition_logs)
+      ${dateFilter}
       ORDER BY timestamp DESC
+      LIMIT $1 OFFSET $2
     `;
 
-    const result = await db.query(query);
+    const result = await db.query(query, values);
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching punch history:', error);
-    res.status(500).json({ error: 'Failed to fetch punch history' });
+    console.error('Error details:', error.message);
+    console.error('Error stack:', error.stack);
+    res.status(500).json({ error: 'Failed to fetch punch history', details: error.message });
   }
 };
 

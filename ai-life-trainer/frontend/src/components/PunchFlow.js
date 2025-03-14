@@ -21,12 +21,12 @@ const PunchFlow = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg">
+      <div className="w-64 bg-white dark:bg-gray-800 shadow-lg">
         <div className="flex flex-col h-full">
           <div className="p-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Make a Punch</h2>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Make a Punch</h2>
             <nav className="space-y-2">
               {['exercise', 'nutrition', 'sleep'].map((category) => (
                 <button
@@ -35,7 +35,7 @@ const PunchFlow = () => {
                   className={`w-full px-4 py-2 text-left rounded-lg transition-colors duration-150 ${
                     selectedCategory === category
                       ? 'bg-pink-500 text-white'
-                      : 'text-gray-600 hover:bg-pink-50'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-900'
                   }`}
                 >
                   {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -51,7 +51,7 @@ const PunchFlow = () => {
               className={`w-full px-4 py-2 text-left rounded-lg transition-colors duration-150 ${
                 selectedCategory === 'history'
                   ? 'bg-pink-500 text-white'
-                  : 'text-gray-600 hover:bg-pink-50'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-900'
               }`}
             >
               History

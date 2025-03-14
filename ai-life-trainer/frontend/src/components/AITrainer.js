@@ -5,6 +5,7 @@ const AITrainer = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(true);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -16,11 +17,23 @@ const AITrainer = () => {
   }, [messages]);
 
   const fetchChatHistory = async () => {
+    setHistoryLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/trainer/chat');
+      console.log(`[${new Date().toISOString()}] Fetching chat history...`);
+      const response = await axios.get('http://localhost:5001/api/trainer/chat');
+      console.log(`[${new Date().toISOString()}] Chat history fetched:`, JSON.stringify(response.data, null, 2));
       setMessages(response.data);
     } catch (error) {
-      console.error('Error fetching chat history:', error);
+      console.error(`[${new Date().toISOString()}] Error fetching chat history:`, error);
+      console.error('Error details:', JSON.stringify(error.response?.data || error.message, null, 2));
+      const errorMessage = error.response?.data?.error || 'Failed to fetch chat history. Please try again later.';
+      setMessages([{
+        sender: 'ai',
+        message: errorMessage,
+        timestamp: new Date().toISOString()
+      }]);
+    } finally {
+      setHistoryLoading(false);
     }
   };
 
@@ -36,13 +49,17 @@ const AITrainer = () => {
     setNewMessage('');
     setLoading(true);
 
+    console.log(`[${new Date().toISOString()}] Submitting user message:`, userMessage);
+
     // Optimistically add user message
     setMessages(prev => [...prev, { sender: 'user', message: userMessage, timestamp: new Date().toISOString() }]);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/trainer/chat', {
+      console.log(`[${new Date().toISOString()}] Sending request to AI trainer...`);
+      const response = await axios.post('http://localhost:5001/api/trainer/chat', {
         message: userMessage
       });
+      console.log(`[${new Date().toISOString()}] Received AI response:`, JSON.stringify(response.data, null, 2));
 
       // Add AI response
       setMessages(prev => [...prev, {
@@ -51,11 +68,34 @@ const AITrainer = () => {
         timestamp: response.data.timestamp
       }]);
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error(`[${new Date().toISOString()}] Error sending message:`, error);
+      console.error('Error details:', JSON.stringify(error.response?.data || error.message, null, 2));
+      
+      let errorMessage;
+      if (error.response) {
+        switch (error.response.status) {
+          case 429:
+            errorMessage = 'Too many requests. Please wait a moment before trying again.';
+            break;
+          case 503:
+            errorMessage = 'The AI service is currently unavailable. Please try again later.';
+            break;
+          case 500:
+            errorMessage = 'An unexpected error occurred. Our team has been notified.';
+            break;
+          default:
+            errorMessage = 'Sorry, I encountered an error. Please try again.';
+        }
+      } else if (error.request) {
+        errorMessage = 'Unable to reach the server. Please check your internet connection.';
+      } else {
+        errorMessage = 'An unexpected error occurred. Please try again.';
+      }
+
       // Show error in chat
       setMessages(prev => [...prev, {
         sender: 'ai',
-        message: 'Sorry, I encountered an error. Please try again.',
+        message: errorMessage,
         timestamp: new Date().toISOString()
       }]);
     } finally {
@@ -79,29 +119,35 @@ const AITrainer = () => {
 
         {/* Chat messages */}
         <div className="flex-1 overflow-y-auto mb-4 space-y-4">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-lg p-3 ${
-                  msg.sender === 'user'
-                    ? 'bg-pink-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700'
-                }`}
-              >
-                <p className="text-sm">{msg.message}</p>
-                <p className={`text-xs mt-1 ${
-                  msg.sender === 'user'
-                    ? 'text-pink-100'
-                    : 'text-gray-500 dark:text-gray-400'
-                }`}>
-                  {formatTimestamp(msg.timestamp)}
-                </p>
-              </div>
+          {historyLoading ? (
+            <div className="text-center py-4">
+              <p>Loading chat history...</p>
             </div>
-          ))}
+          ) : (
+            messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[80%] rounded-lg p-3 ${
+                    msg.sender === 'user'
+                      ? 'bg-pink-500 text-white'
+                      : 'bg-gray-100 dark:bg-gray-700'
+                  }`}
+                >
+                  <p className="text-sm">{msg.message}</p>
+                  <p className={`text-xs mt-1 ${
+                    msg.sender === 'user'
+                      ? 'text-pink-100'
+                      : 'text-gray-500 dark:text-gray-400'
+                  }`}>
+                    {formatTimestamp(msg.timestamp)}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
           <div ref={messagesEndRef} />
         </div>
 

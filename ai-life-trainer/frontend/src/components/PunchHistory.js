@@ -33,65 +33,65 @@ const PunchHistory = () => {
   };
 
   const renderExerciseLog = (log) => (
-    <div className="bg-white p-4 rounded-lg shadow space-y-2">
+    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow space-y-2">
       <div className="flex justify-between items-start">
-        <h3 className="text-lg font-semibold text-pink-600">Exercise Session</h3>
-        <span className="text-sm text-gray-500">{formatDate(log.timestamp)}</span>
+        <h3 className="text-lg font-semibold text-pink-600 dark:text-pink-400">Exercise Session</h3>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(log.timestamp)}</span>
       </div>
       <div className="flex flex-row grid grid-cols-2 gap-4 text-sm">
         <div className="flex flex-row">
-          <span className="text-gray-600 pr-2">Duration:</span>
-          <p className=" text-gray-500">{log.duration_minutes} minutes</p>
+          <span className="text-gray-600 dark:text-gray-300 pr-2">Duration:</span>
+          <p className="text-gray-500 dark:text-gray-400">{log.duration_minutes} minutes</p>
         </div>
         <div className="flex flex-row">
-          <span className="pr-2 text-gray-600">Intensity:</span>
-          <p className=" text-gray-500">{log.intensity}/10</p>
+          <span className="pr-2 text-gray-600 dark:text-gray-300">Intensity:</span>
+          <p className="text-gray-500 dark:text-gray-400">{log.intensity}/10</p>
         </div>
         <div className="flex flex-row">
-          <span className="pr-2 text-gray-600">Energy level:</span>
-          <p className=" text-gray-500">{log.tiredness}/10</p>
+          <span className="pr-2 text-gray-600 dark:text-gray-300">Energy level:</span>
+          <p className="text-gray-500 dark:text-gray-400">{log.tiredness}</p>
         </div>
         <div className="flex flex-row">
-          <span className="pr-2 text-gray-600">Goal Met:</span>
-          <span className={`ml-2 font-medium ${log.goal_met ? 'text-green-600' : 'text-red-600'}`}>
+          <span className="pr-2 text-gray-600 dark:text-gray-300">Goal Met:</span>
+          <span className={`ml-2 font-medium ${log.goal_met ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
             {log.goal_met ? 'Yes' : 'No'}
           </span>
         </div>
         {log.calories_burned !== null && (
           <div className="flex flex-row">
-            <span className="pr-2 text-gray-700">Calories:</span>
-            <p className=" text-gray-500">{log.calories_burned} kcal</p>
+            <span className="pr-2 text-gray-700 dark:text-gray-300">Calories:</span>
+            <p className="text-gray-500 dark:text-gray-400">{log.calories_burned} kcal</p>
           </div>
         )}
       </div>
       {log.notes && (
         <div className="flex flex-row mt-2 text-sm">
-          <span className="text-gray-700 pr-2">Notes:</span>
-          <p className=" text-gray-500">{log.notes}</p>
+          <span className="text-gray-700 dark:text-gray-300 pr-2">Notes:</span>
+          <p className="text-gray-500 dark:text-gray-400">{log.notes}</p>
         </div>
       )}
     </div>
   );
 
   const renderSleepLog = (log) => (
-    <div className="bg-white p-4 rounded-lg shadow space-y-2">
+    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow space-y-2">
       <div className="flex justify-between items-start">
-        <h3 className="text-lg font-semibold text-indigo-600">Sleep Log</h3>
-        <span className="text-sm text-gray-500">{formatDate(log.timestamp)}</span>
+        <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">Sleep Log</h3>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(log.timestamp)}</span>
       </div>
       <div className="text-sm">
         
         <div className="flex flex-row mt-2">
-          <span className="pr-2 text-gray-700">Quality:</span>
-          <p className="font-sm text-gray-500">{
+          <span className="pr-2 text-gray-700 dark:text-gray-300">Quality:</span>
+          <p className="font-sm text-gray-500 dark:text-gray-400">{
               ['Very Poor', 'Poor', 'Okay', 'Good', 'Very Good'][log.quality - 1]
             }</p>
         </div>
 
         {log.notes && (
           <div className="flex flex-row mt-2">
-            <span className="pr-2 text-gray-700">Notes:</span>
-            <p className="font-sm text-gray-500">{log.notes}</p>
+            <span className="pr-2 text-gray-700 dark:text-gray-300">Notes:</span>
+            <p className="font-sm text-gray-500 dark:text-gray-400">{log.notes}</p>
           </div>
         )}
 
@@ -100,28 +100,28 @@ const PunchHistory = () => {
   );
 
   const renderNutritionLog = (log) => (
-    <div className="bg-white p-4 rounded-lg shadow space-y-2">
+    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow space-y-2">
       <div className="flex justify-between items-start">
-        <h3 className="text-lg font-semibold text-green-600">Nutrition Log</h3>
-        <span className="text-sm text-gray-500">{formatDate(log.timestamp)}</span>
+        <h3 className="text-lg font-semibold text-green-600 dark:text-green-400">Nutrition Log</h3>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(log.timestamp)}</span>
       </div>
       
       <div className="text-sm">
       
       <div className="flex flex-row mt-2">
-          <span className=" text-gray-700 pr-2">Meal: </span>
-          <p className=" text-gray-500">{log.meal_type}</p>
+          <span className="text-gray-700 dark:text-gray-300 pr-2">Meal: </span>
+          <p className="text-gray-500 dark:text-gray-400">{log.meal_type}</p>
         </div>
           
         
         <div className="flex flex-row mt-2">
-          <span className=" text-gray-700 pr-2">Description: </span>
-          <p className=" text-gray-500">{log.description}</p>
+          <span className="text-gray-700 dark:text-gray-300 pr-2">Description: </span>
+          <p className="text-gray-500 dark:text-gray-400">{log.description}</p>
         </div>
         
         {log.calories && <div className="flex flex-row mt-2">
-          <span className=" text-gray-700 pr-2">Calories: </span>
-          <p className=" text-gray-500">{log.calories}</p>
+          <span className="text-gray-700 dark:text-gray-300 pr-2">Calories: </span>
+          <p className="text-gray-500 dark:text-gray-400">{log.calories}</p>
         </div>}
 
       </div>
@@ -152,11 +152,11 @@ const PunchHistory = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-gray-800 pr-4">History</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 pr-4">History</h2>
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="px-3 pr-8 py-2 border-r-[5px] border-white"
+          className="px-3 pr-8 py-2 border-r-[5px] border-white dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
         >
           <option value="all">All Entries</option>
           <option value="exercise">Exercise Only</option>
@@ -166,7 +166,7 @@ const PunchHistory = () => {
       </div>
 
       {filteredLogs.length === 0 ? (
-        <div className="text-center text-gray-500 py-8">
+        <div className="text-center text-gray-500 dark:text-gray-400 py-8">
           No entries found
         </div>
       ) : (
