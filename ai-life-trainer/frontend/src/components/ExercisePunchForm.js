@@ -21,7 +21,9 @@ const ExercisePunchForm = () => {
     const { name, value, type } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? e.target.checked : value
+      [name]: type === 'checkbox' ? e.target.checked : 
+               name === 'goal_met' ? value === 'true' : 
+               value
     }));
   };
 
@@ -144,13 +146,13 @@ const ExercisePunchForm = () => {
           </label>
           <select
             name="goal_met"
-            value={formData.goal_met}
+            value={formData.goal_met.toString()}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
             required
           >
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
