@@ -8,4 +8,3 @@ A modern React application for tracking fitness activities and getting AI-powere
 - 📊 Visual analytics with interactive charts
 - 🤖 AI-powered training assistant
 - 🌓 Light/Dark theme support
-- 📱 Responsive design for all devices
